@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+
+{% block og_type %}article{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ entry.title|escapejs }}",
+    "datePublished": "{{ entry.date|date:'c' }}",
+    "dateModified": "{{ entry.updated_at|date:'c' }}",
+    "description": "{{ entry.summary|escapejs }}",
+    "author": {"@type": "Organization", "name": "{{ SITE_NAME }}"}
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<article class="section section--narrow">
+    <p class="eyebrow">{{ entry.date|date:"d M Y" }}{% if entry.location %} · {{ entry.location }}{% endif %}</p>
+    <h1>{{ entry.title }}</h1>
+    {% if entry.cover_image %}
+    <img src="{{ entry.cover_image.url }}" alt="{{ entry.title }}" class="article-image" loading="lazy" width="800" height="500">
+    {% endif %}
+    <div class="article-body">{{ entry.body|linebreaks }}</div>
+    <a href="{% url 'core:work_list' %}" class="link-arrow">← Back to all work</a>
+</article>
+{% endblock %}

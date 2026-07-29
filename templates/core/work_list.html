@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<section class="section">
+    <p class="eyebrow">Nayi Raah, In Action</p>
+    <h1>Work Done Till Date</h1>
+    <p class="section__lede">Every session is a step along the path. Here's the
+        journey so far, in our own words.</p>
+
+    {% if entries %}
+    <ol class="timeline">
+        {% for entry in entries %}
+        <li class="timeline__item">
+            <div class="timeline__marker" aria-hidden="true"></div>
+            <div class="timeline__content">
+                <p class="timeline__date">{{ entry.date|date:"d M Y" }}{% if entry.location %} · {{ entry.location }}{% endif %}</p>
+                <h2><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h2>
+                <p>{{ entry.summary }}</p>
+                <a href="{{ entry.get_absolute_url }}" class="link-arrow">Read the full story →</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ol>
+    {% else %}
+    <p>Our first session write-up is coming soon.</p>
+    {% endif %}
+</section>
+{% endblock %}

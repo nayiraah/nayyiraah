@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<section class="section section--narrow">
+    <p class="eyebrow">About Us</p>
+    <h1>Nova Vita, Nova Via</h1>
+    <p class="section__lede">New life, new path. Nayi Raah is a journey of awareness, learning and
+        meaningful change — turning ideas into skills, and support into action.</p>
+
+    <h2>Why Nayi Raah</h2>
+    <p>Across India, countless girls face barriers to education, wellness
+        information and simple encouragement — not because the opportunities
+        don't exist, but because no one has opened the door yet. Nayi Raah
+        exists to open that door: a safe space to seek guidance, discover
+        opportunities and know that she is never alone.</p>
+
+    <h2>What We Do</h2>
+    <p>We run conversations and sessions on topics that are often left
+        unspoken — like menstrual hygiene — because we believe important
+        conversations should feel open, normal and empowering. Every session
+        is a small step, but together they build a more aware and supportive
+        community.</p>
+
+    <h2>Our Approach</h2>
+    <p>We keep things simple and honest: real conversations over polished
+        pamphlets, consistency over one-off events, and always meeting girls
+        where they are. See the sessions we've run so far on our
+        <a href="{% url 'core:work_list' %}">Work page</a>.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<section class="section">
+    <p class="eyebrow">Find a Path</p>
+    <h1>Resources</h1>
+    <p class="section__lede">Curated guidance across the areas that matter most —
+        pick where you'd like to start.</p>
+
+    {% for category, items in grouped_resources.items %}
+    <div class="resource-group">
+        <h2>{{ items.0.get_category_display }}</h2>
+        <div class="card-grid">
+            {% for resource in items %}
+            <article class="card">
+                <h3>{% if resource.emoji %}<span aria-hidden="true">{{ resource.emoji }}</span> {% endif %}{{ resource.title }}</h3>
+                <p>{{ resource.summary }}</p>
+                {% if resource.body %}<p>{{ resource.body }}</p>{% endif %}
+                {% if resource.external_link %}
+                <a href="{{ resource.external_link }}" class="link-arrow" target="_blank" rel="noopener noreferrer">Learn more →</a>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% empty %}
+    <p>Resources are being added soon — check back shortly, or <a href="{% url 'core:contact' %}">reach out</a> if you need guidance now.</p>
+    {% endfor %}
+</section>
+{% endblock %}

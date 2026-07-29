@@ -1,0 +1,92 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {# ---------------------------------------------------------------- #}
+    {# Reusable SEO block. Every view passes meta_title / meta_description; #}
+    {# pages without an override fall back to the site-wide defaults.       #}
+    {# ---------------------------------------------------------------- #}
+    {% block seo %}
+    <title>{% block title %}{{ meta_title|default:SITE_NAME }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ meta_description|default:SITE_DEFAULT_DESCRIPTION }}{% endblock %}">
+    {% block meta_keywords %}{% if meta_keywords %}<meta name="keywords" content="{{ meta_keywords }}">{% endif %}{% endblock %}
+    <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+    <link rel="canonical" href="{% block canonical %}https://{{ SITE_DOMAIN }}{{ request.path }}{% endblock %}">
+
+    <meta property="og:site_name" content="{{ SITE_NAME }}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:title" content="{{ meta_title|default:SITE_NAME }}">
+    <meta property="og:description" content="{{ meta_description|default:SITE_DEFAULT_DESCRIPTION }}">
+    <meta property="og:url" content="https://{{ SITE_DOMAIN }}{{ request.path }}">
+    <meta property="og:image" content="{% block og_image %}https://{{ SITE_DOMAIN }}{% static 'images/og-default.jpg' %}{% endblock %}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ meta_title|default:SITE_NAME }}">
+    <meta name="twitter:description" content="{{ meta_description|default:SITE_DEFAULT_DESCRIPTION }}">
+    {% endblock %}
+
+    {% block structured_data %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "{{ SITE_NAME }}",
+        "description": "{{ SITE_DEFAULT_DESCRIPTION|escapejs }}",
+        "url": "https://{{ SITE_DOMAIN }}/",
+        "sameAs": ["{{ SOCIAL_INSTAGRAM }}"]
+    }
+    </script>
+    {% endblock %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="{% url 'core:home' %}" class="brand">
+                <span class="brand__mark" aria-hidden="true">🌻</span>
+                <span class="brand__name">{{ SITE_NAME }}</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+                <span></span><span></span><span></span>
+                <span class="sr-only">Menu</span>
+            </button>
+            <nav class="primary-nav" id="primaryNav">
+                <a href="{% url 'core:about' %}">About</a>
+                <a href="{% url 'core:resources' %}">Resources</a>
+                <a href="{% url 'core:work_list' %}">Our Work</a>
+                <a href="{% url 'core:sunshine' %}">Today's Sunshine</a>
+                <a href="{% url 'core:contact' %}" class="nav-cta">Reach Out</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        {% if messages %}
+        <ul class="site-messages">
+            {% for message in messages %}
+            <li class="site-messages__item{% if message.tags %} site-messages__item--{{ message.tags }}{% endif %}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <p>🌻 {{ SITE_NAME }} — {{ SITE_TAGLINE }}</p>
+            <a href="{{ SOCIAL_INSTAGRAM }}" target="_blank" rel="noopener noreferrer">Follow on Instagram</a>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>

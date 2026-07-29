@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<section class="section section--narrow">
+    <p class="eyebrow">📩 Reach Out</p>
+    <h1>Contact Nayi Raah</h1>
+    <p class="section__lede">Complete the form below and we'll get back to you —
+        or reach us directly on <a href="{{ SOCIAL_INSTAGRAM }}" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>
+
+    <form method="post" class="contact-form" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-field{% if field.name == 'website' %} form-field--hidden{% endif %}">
+            {% if field.name != 'website' %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{% endif %}
+            {{ field }}
+            {% if field.help_text %}<p class="form-field__help">{{ field.help_text }}</p>{% endif %}
+            {% for error in field.errors %}<p class="form-field__error">{{ error }}</p>{% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="button button--primary">Send Message</button>
+    </form>
+</section>
+{% endblock %}

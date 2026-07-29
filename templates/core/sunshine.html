@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<section class="section section--narrow">
+    <p class="eyebrow">🌞 Today's Sunshine</p>
+    {% if entry %}
+    <blockquote class="sunshine-quote">“{{ entry.quote }}”</blockquote>
+
+    <h2>🌻 What it means</h2>
+    <p>{{ entry.meaning }}</p>
+
+    <h2>💛 Today's Reminder</h2>
+    <p>{{ entry.reminder }}</p>
+
+    <h2>✨ Daily Affirmation</h2>
+    <p class="affirmation">{{ entry.affirmation }}</p>
+    {% else %}
+    <p>A new Sunshine entry is on its way — check back soon, or read our
+        <a href="{% url 'core:work_list' %}">latest work</a> in the meantime.</p>
+    {% endif %}
+</section>
+{% endblock %}

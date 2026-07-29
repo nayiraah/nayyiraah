@@ -1,0 +1,61 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero__inner">
+        <p class="eyebrow">Nova Vita · Nova Via</p>
+        <h1 class="hero__title">Every girl deserves<br>a path of her own.</h1>
+        <p class="hero__subtitle">
+            Nayi Raah helps every girl across India bloom with confidence, courage
+            and opportunity — a safe space to seek guidance, discover opportunities
+            and know she is never alone.
+        </p>
+        <a href="{% url 'core:contact' %}" class="button button--primary">Reach Out</a>
+        <a href="{% url 'core:work_list' %}" class="button button--ghost">See Our Work</a>
+    </div>
+    <svg class="hero__path" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,80 C200,20 400,120 600,60 C800,0 1000,100 1200,40" />
+    </svg>
+</section>
+
+<section class="section" aria-labelledby="mission-heading">
+    <h2 id="mission-heading">Our Mission</h2>
+    <p class="section__lede">
+        Nayi Raah believes every girl deserves access to support, education and
+        encouragement. Whether she's looking for study guidance, career
+        inspiration or simply someone to listen, we're here to help her grow.
+    </p>
+</section>
+
+<section class="section" aria-labelledby="path-heading">
+    <h2 id="path-heading">Find a Path</h2>
+    <div class="card-grid">
+        {% for resource in resources %}
+        <article class="card">
+            <h3>{% if resource.emoji %}<span aria-hidden="true">{{ resource.emoji }}</span> {% endif %}{{ resource.title }}</h3>
+            <p>{{ resource.summary }}</p>
+        </article>
+        {% empty %}
+        <p>Resources are being added soon — check back shortly.</p>
+        {% endfor %}
+    </div>
+    <a href="{% url 'core:resources' %}" class="link-arrow">Explore all resources →</a>
+</section>
+
+{% if latest_work %}
+<section class="section" aria-labelledby="work-heading">
+    <h2 id="work-heading">Recent Work</h2>
+    <div class="card-grid">
+        {% for entry in latest_work %}
+        <article class="card">
+            <p class="card__date">{{ entry.date|date:"d M Y" }}{% if entry.location %} · {{ entry.location }}{% endif %}</p>
+            <h3><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h3>
+            <p>{{ entry.summary }}</p>
+        </article>
+        {% endfor %}
+    </div>
+    <a href="{% url 'core:work_list' %}" class="link-arrow">See everything we've done →</a>
+</section>
+{% endif %}
+{% endblock %}

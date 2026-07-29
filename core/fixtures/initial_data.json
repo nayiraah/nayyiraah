@@ -1,0 +1,88 @@
+[
+  {
+    "model": "core.resource",
+    "pk": 1,
+    "fields": {
+      "title": "Education",
+      "category": "education",
+      "emoji": "🎓",
+      "summary": "Study tips and learning resources.",
+      "body": "",
+      "external_link": "",
+      "order": 1,
+      "is_published": true
+    }
+  },
+  {
+    "model": "core.resource",
+    "pk": 2,
+    "fields": {
+      "title": "Wellness",
+      "category": "wellness",
+      "emoji": "🌼",
+      "summary": "Health, hygiene and self-care information.",
+      "body": "",
+      "external_link": "",
+      "order": 2,
+      "is_published": true
+    }
+  },
+  {
+    "model": "core.resource",
+    "pk": 3,
+    "fields": {
+      "title": "Support",
+      "category": "support",
+      "emoji": "💛",
+      "summary": "Reach out for guidance in a welcoming environment.",
+      "body": "",
+      "external_link": "",
+      "order": 3,
+      "is_published": true
+    }
+  },
+  {
+    "model": "core.resource",
+    "pk": 4,
+    "fields": {
+      "title": "Volunteer",
+      "category": "volunteer",
+      "emoji": "🤝",
+      "summary": "Join us in empowering more girls.",
+      "body": "",
+      "external_link": "",
+      "order": 4,
+      "is_published": true
+    }
+  },
+  {
+    "model": "core.sunshineentry",
+    "pk": 1,
+    "fields": {
+      "date": "2026-07-29",
+      "quote": "A flower does not think of competing with the flower next to it. It just blooms.",
+      "meaning": "Everyone has a different journey. Instead of comparing yourself with others, celebrate your own progress and keep growing one step at a time.",
+      "reminder": "Do one small thing today that brings you closer to your dreams.",
+      "affirmation": "I am capable. I am growing. I deserve every opportunity that comes my way.",
+      "is_published": true
+    }
+  },
+  {
+    "model": "core.workentry",
+    "pk": 1,
+    "fields": {
+      "title": "Menstrual Hygiene Awareness Session",
+      "slug": "menstrual-hygiene-awareness-session",
+      "date": "2026-07-29",
+      "location": "",
+      "summary": "An open conversation on menstrual hygiene, creating a space where the topic feels normal and empowering.",
+      "body": "Nayi Raah is more than just a project — it is a journey of awareness, learning and meaningful change. In this session, we visited and spoke about menstrual hygiene, hoping to create a space where such important conversations feel open, normal and empowering.\n\nIt was a small step, but one that reflects the larger purpose behind Nayi Raah: to support, educate and uplift with care and compassion. Every conversation like this brings us closer to a more aware and supportive community.",
+      "is_published": true,
+      "meta_title": "",
+      "meta_description": "",
+      "meta_keywords": "",
+      "created_at": "2026-07-29T12:00:00Z",
+      "updated_at": "2026-07-29T12:00:00Z"
+    }
+  }
+]
