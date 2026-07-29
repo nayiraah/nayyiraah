@@ -25,7 +25,10 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-dev-only-chang
 DEBUG = env_bool("DJANGO_DEBUG", default=False)
 # DEBUG = env_bool("DJANGO_DEBUG", default=True)
 
-ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1")
+ALLOWED_HOSTS = env_list(
+    "DJANGO_ALLOWED_HOSTS",
+    "localhost,127.0.0.1,nayyiraah-production.up.railway.app"
+)
 
 # Site-wide constants used across templates and SEO tags (see
 # core/context_processors.py). Update these for your real domain/handle.
@@ -35,7 +38,10 @@ SITE_DEFAULT_DESCRIPTION = (
     "Nayi Raah helps every girl across India bloom with confidence, courage "
     "and opportunity through education, wellness guidance and support."
 )
-SITE_DOMAIN = os.environ.get("DJANGO_SITE_DOMAIN", "example.com")
+SITE_DOMAIN = os.environ.get(
+    "DJANGO_SITE_DOMAIN",
+    "nayyiraah-production.up.railway.app"
+)
 SOCIAL_INSTAGRAM = "https://www.instagram.com/_nayiraah_/"
 
 if not DEBUG:
