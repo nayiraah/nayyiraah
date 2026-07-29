@@ -45,8 +45,11 @@ SITE_DOMAIN = os.environ.get(
 SOCIAL_INSTAGRAM = "https://www.instagram.com/_nayiraah_/"
 
 if not DEBUG:
-    # Only enforced in production so local http:// development isn't blocked.
-    SECURE_SSL_REDIRECT = env_bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
+    SECURE_SSL_REDIRECT = env_bool("DJANGO_SECURE_SSL_REDIRECT", default=False)
+
+    # Railway handles HTTPS and forwards this header to Django
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 31536000
@@ -54,8 +57,10 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_REFERRER_POLICY = "same-origin"
+
     CSRF_TRUSTED_ORIGINS = env_list(
-        "DJANGO_CSRF_TRUSTED_ORIGINS", f"https://{SITE_DOMAIN},https://www.{SITE_DOMAIN}"
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        f"https://{SITE_DOMAIN},https://www.{SITE_DOMAIN}"
     )
 else:
     SECURE_CONTENT_TYPE_NOSNIFF = True
