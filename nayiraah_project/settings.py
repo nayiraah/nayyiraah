@@ -22,8 +22,8 @@ def env_list(name, default=""):
 # development and is intentionally obviously insecure.
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-dev-only-change-me")
 
-DEBUG = env_bool("DJANGO_DEBUG", default=False)
-# DEBUG = env_bool("DJANGO_DEBUG", default=True)
+# DEBUG = env_bool("DJANGO_DEBUG", default=False)
+DEBUG = env_bool("DJANGO_DEBUG", default=True)
 
 ALLOWED_HOSTS = env_list(
     "DJANGO_ALLOWED_HOSTS",
@@ -60,7 +60,7 @@ if not DEBUG:
 
     CSRF_TRUSTED_ORIGINS = env_list(
         "DJANGO_CSRF_TRUSTED_ORIGINS",
-        f"https://{SITE_DOMAIN},https://www.{SITE_DOMAIN}"
+        f"https://{SITE_DOMAIN},https://www.{SITE_DOMAIN},https://nayyiraah-production.up.railway.app"
     )
 else:
     SECURE_CONTENT_TYPE_NOSNIFF = True
