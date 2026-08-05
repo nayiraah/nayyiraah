@@ -29,6 +29,10 @@ ALLOWED_HOSTS = env_list(
     "DJANGO_ALLOWED_HOSTS",
     "localhost,127.0.0.1,nayyiraah-production.up.railway.app"
 )
+CSRF_TRUSTED_ORIGINS = env_list(
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        f"https://{SITE_DOMAIN},https://www.{SITE_DOMAIN},https://nayyiraah-production.up.railway.app"
+    )
 
 # Site-wide constants used across templates and SEO tags (see
 # core/context_processors.py). Update these for your real domain/handle.
@@ -58,10 +62,10 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_REFERRER_POLICY = "same-origin"
 
-    CSRF_TRUSTED_ORIGINS = env_list(
-        "DJANGO_CSRF_TRUSTED_ORIGINS",
-        f"https://{SITE_DOMAIN},https://www.{SITE_DOMAIN},https://nayyiraah-production.up.railway.app"
-    )
+    # CSRF_TRUSTED_ORIGINS = env_list(
+    #     "DJANGO_CSRF_TRUSTED_ORIGINS",
+    #     f"https://{SITE_DOMAIN},https://www.{SITE_DOMAIN},https://nayyiraah-production.up.railway.app"
+    # )
 else:
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
