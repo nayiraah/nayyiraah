@@ -29,10 +29,6 @@ ALLOWED_HOSTS = env_list(
     "DJANGO_ALLOWED_HOSTS",
     "localhost,127.0.0.1,nayyiraah-production.up.railway.app"
 )
-CSRF_TRUSTED_ORIGINS = env_list(
-        "DJANGO_CSRF_TRUSTED_ORIGINS",
-        f"https://{SITE_DOMAIN},https://www.{SITE_DOMAIN},https://nayyiraah-production.up.railway.app"
-    )
 
 # Site-wide constants used across templates and SEO tags (see
 # core/context_processors.py). Update these for your real domain/handle.
@@ -46,6 +42,12 @@ SITE_DOMAIN = os.environ.get(
     "DJANGO_SITE_DOMAIN",
     "nayyiraah-production.up.railway.app"
 )
+
+CSRF_TRUSTED_ORIGINS = env_list(
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        f"https://{SITE_DOMAIN},https://www.{SITE_DOMAIN},https://nayyiraah-production.up.railway.app"
+    )
+
 SOCIAL_INSTAGRAM = "https://www.instagram.com/_nayiraah_/"
 
 if not DEBUG:
