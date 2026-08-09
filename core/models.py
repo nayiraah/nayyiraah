@@ -82,12 +82,7 @@ class WorkEntry(SEOFields):
 
 
 class SunshineEntry(models.Model):
-    """
-    A single 'Today's Sunshine' entry: a quote plus its meaning, a reminder and an
-    affirmation. The view picks the entry matching today's date if one exists,
-    otherwise falls back to the most recently published one, so the page always
-    has something to show without needing a new entry every single day.
-    """
+
     date = models.DateField(unique=True, help_text="The date this entry is meant for.")
     quote = models.CharField(max_length=300)
     meaning = models.TextField(help_text="What the quote means, in plain language.")
@@ -105,7 +100,6 @@ class SunshineEntry(models.Model):
 
 
 class ContactMessage(models.Model):
-    """Stores messages submitted through the Contact page form."""
     name = models.CharField(max_length=120)
     email = models.EmailField()
     phone = models.CharField(max_length=20, blank=True)

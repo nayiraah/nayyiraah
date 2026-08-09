@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.http import require_http_methods
 
-from .forms import ContactForm
+from .forms import ContactForm,SunshineEntryForm,WorkEntryForm
 from .models import Resource, SunshineEntry, WorkEntry,ContactMessage
 
 
@@ -138,6 +138,58 @@ def robots_txt(request):
 def contact_admin(request):
     messages = ContactMessage.objects.all()
     return render( request, "core/contact_admin.html", { "messages": messages, }, )
+
+@staff_member_required
+def sunshine_admin(request):
+    entries = SunshineEntry.objects.all()
+
+    if request.method == "POST":
+        form = SunshineEntryForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                "Sunshine entry added successfully."
+            )
+            return redirect("core:sunshine_admin")
+    else:
+        form = SunshineEntryForm()
+
+    return render(
+        request,
+        "core/sunshine_admin.html",
+        {
+            "entries": entries,
+            "form": form,
+        },
+    )
+
+@staff_member_required
+def work_admin(request):
+    entries = WorkEntry.objects.all()
+
+    if request.method == "POST":
+        form = WorkEntryForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                "Work entry added successfully."
+            )
+            return redirect("core:work_admin")
+    else:
+        form = WorkEntryForm()
+
+    return render(
+        request,
+        "core/work_admin.html",
+        {
+            "entries": entries,
+            "form": form,
+        },
+    )
 
 def custom_404(request, exception=None):
     return render(request, "core/404.html", status=404)

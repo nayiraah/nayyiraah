@@ -1,0 +1,76 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class="admin-page">
+
+    <h1>🌻 Sunshine</h1>
+
+    <p>Add a new Today's Sunshine entry.</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Add Sunshine
+        </button>
+    </form>
+
+    <hr>
+
+    <h2>Existing Sunshine Entries</h2>
+
+    {% if entries %}
+        {% for entry in entries %}
+            <div class="sunshine-entry">
+                <h3>{{ entry.date }}</h3>
+
+                <p>
+                    <strong>Quote:</strong>
+                    {{ entry.quote }}
+                </p>
+
+                <p>
+                    <strong>Meaning:</strong>
+                    {{ entry.meaning }}
+                </p>
+
+                <p>
+                    <strong>Reminder:</strong>
+                    {{ entry.reminder }}
+                </p>
+
+                <p>
+                    <strong>Affirmation:</strong>
+                    {{ entry.affirmation }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {% if entry.is_published %}
+                        Published
+                    {% else %}
+                        Draft
+                    {% endif %}
+                </p>
+            </div>
+
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No Sunshine entries yet.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

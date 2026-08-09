@@ -1,0 +1,99 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class="admin-page">
+
+    <h1>📚 Work Done Till Date</h1>
+
+    <p>Add a new activity, session, or project.</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Add Work Entry
+        </button>
+    </form>
+
+    <hr>
+
+    <h2>Existing Work Entries</h2>
+
+    {% if entries %}
+
+        {% for entry in entries %}
+
+            <div class="work-entry">
+
+                <h3>{{ entry.title }}</h3>
+
+                <p>
+                    <strong>Date:</strong>
+                    {{ entry.date }}
+                </p>
+
+                {% if entry.location %}
+                    <p>
+                        <strong>Location:</strong>
+                        {{ entry.location }}
+                    </p>
+                {% endif %}
+
+                <p>
+                    <strong>Summary:</strong>
+                    {{ entry.summary }}
+                </p>
+
+                <p>
+                    <strong>Details:</strong>
+                    {{ entry.body }}
+                </p>
+
+                {% if entry.cover_image %}
+                    <p>
+                        <strong>Cover image:</strong>
+                    </p>
+
+                    <img
+                        src="{{ entry.cover_image.url }}"
+                        alt="{{ entry.title }}"
+                        style="max-width: 300px;"
+                    >
+                {% endif %}
+
+                <p>
+                    <strong>Status:</strong>
+
+                    {% if entry.is_published %}
+                        Published
+                    {% else %}
+                        Draft
+                    {% endif %}
+                </p>
+
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No work entries yet.</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
