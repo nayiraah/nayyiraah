@@ -108,6 +108,7 @@ class ContactMessage(models.Model):
     """Stores messages submitted through the Contact page form."""
     name = models.CharField(max_length=120)
     email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)

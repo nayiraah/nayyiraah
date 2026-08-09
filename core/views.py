@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import mail_admins
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.response import TemplateResponse
@@ -7,7 +8,7 @@ from django.utils import timezone
 from django.views.decorators.http import require_http_methods
 
 from .forms import ContactForm
-from .models import Resource, SunshineEntry, WorkEntry
+from .models import Resource, SunshineEntry, WorkEntry,ContactMessage
 
 
 def home(request):
@@ -133,6 +134,10 @@ def robots_txt(request):
     ]
     return TemplateResponse(request, "core/robots.txt", {"lines": lines}, content_type="text/plain")
 
+@staff_member_required
+def contact_admin(request):
+    messages = ContactMessage.objects.all()
+    return render( request, "core/contact_admin.html", { "messages": messages, }, )
 
 def custom_404(request, exception=None):
     return render(request, "core/404.html", status=404)

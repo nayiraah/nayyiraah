@@ -34,11 +34,11 @@ class SunshineEntryAdmin(admin.ModelAdmin):
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "created_at", "is_read")
+    list_display = ("name", "email", "phone", "created_at", "is_read")
     list_filter = ("is_read",)
     list_editable = ("is_read",)
-    readonly_fields = ("name", "email", "message", "created_at")
-    search_fields = ("name", "email", "message")
+    readonly_fields = ("name", "email", "phone", "message", "created_at")
+    search_fields = ("name", "email", "phone", "message")
 
     def has_add_permission(self, request):
         # Messages only ever come in through the public contact form.

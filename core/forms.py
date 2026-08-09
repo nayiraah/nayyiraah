@@ -10,7 +10,7 @@ class ContactForm(forms.ModelForm):
 
     class Meta:
         model = ContactMessage
-        fields = ["name", "email", "message"]
+        fields = ["name", "email","phone", "message",]
         widgets = {
             "name": forms.TextInput(attrs={
                 "placeholder": "Your name", "autocomplete": "name", "maxlength": 120,
@@ -21,6 +21,7 @@ class ContactForm(forms.ModelForm):
             "message": forms.Textarea(attrs={
                 "placeholder": "What would you like to tell us?", "rows": 6,
             }),
+            "phone": forms.TextInput(attrs={ "placeholder": "Your phone number", "autocomplete": "tel", }),
         }
 
     def clean_website(self):

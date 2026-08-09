@@ -12,4 +12,5 @@ urlpatterns = [
     path("work/", views.work_list, name="work_list"),
     path("work/<slug:slug>/", views.work_detail, name="work_detail"),
     path("contact/", views.contact, name="contact"),
+    path("admin-panel/",views.contact_admin,name="contact_admin"),
 ]
