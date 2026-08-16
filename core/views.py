@@ -166,6 +166,33 @@ def sunshine_admin(request):
     )
 
 @staff_member_required
+def sunshine_edit(request, date):
+    entry = get_object_or_404(SunshineEntry, date=date)
+
+    if request.method == "POST":
+        form = SunshineEntryForm(request.POST, instance=entry)
+
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                "Sunshine entry updated successfully."
+            )
+            return redirect("core:sunshine_admin")
+    else:
+        form = SunshineEntryForm(instance=entry)
+
+    return render(
+        request,
+        "core/sunshine_edit.html",
+        {
+            "entry": entry,
+            "form": form,
+        },
+    )
+
+
+@staff_member_required
 def work_admin(request):
     entries = WorkEntry.objects.all()
 
@@ -192,3 +219,37 @@ def work_admin(request):
     )
 def custom_404(request, exception=None):
     return render(request, "core/404.html", status=404)
+
+
+@staff_member_required
+def work_edit(request, slug):
+    entry = get_object_or_404(WorkEntry, slug=slug)
+
+    if request.method == "POST":
+        form = WorkEntryForm(
+            request.POST,
+            request.FILES,
+            instance=entry,
+        )
+
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                "Work entry updated successfully."
+            )
+            return redirect(
+                "core:work_detail",
+                slug=entry.slug,
+            )
+    else:
+        form = WorkEntryForm(instance=entry)
+
+    return render(
+        request,
+        "core/work_edit.html",
+        {
+            "entry": entry,
+            "form": form,
+        },
+    )

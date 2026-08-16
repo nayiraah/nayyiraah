@@ -1,0 +1,48 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<section class="section section--narrow">
+
+    <p class="eyebrow">✏️ Edit Work</p>
+
+    <h1>Edit Work Entry</h1>
+
+    <form method="post" enctype="multipart/form-data" class="contact-form">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="form-field">
+
+            <label for="{{ field.id_for_label }}">
+                {{ field.label }}
+            </label>
+
+            {{ field }}
+
+            {% if field.help_text %}
+                <p class="form-field__help">
+                    {{ field.help_text }}
+                </p>
+            {% endif %}
+
+            {% for error in field.errors %}
+                <p class="form-field__error">
+                    {{ error }}
+                </p>
+            {% endfor %}
+
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="button button--primary">
+            Save Changes
+        </button>
+
+        <a href="{% url 'core:work_detail' entry.slug %}" class="link-arrow">
+            Cancel
+        </a>
+
+    </form>
+
+</section>
+{% endblock %}

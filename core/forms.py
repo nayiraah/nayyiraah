@@ -22,6 +22,9 @@ class ContactForm(forms.ModelForm):
                 "placeholder": "you@example.com",
                 "autocomplete": "email",
             }),
+            "phone":forms.NumberInput(attrs={
+                "placeholder":"Contact Number"
+            }),
             "message": forms.Textarea(attrs={
                 "placeholder": "What would you like to tell us?",
                 "rows": 6,
@@ -117,5 +120,3 @@ class WorkEntryForm(forms.ModelForm):
             ),
             "cover_image": forms.ClearableFileInput(),
         }
-
-

@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class="admin-page">
+
+    <h1>✏️ Edit Today's Sunshine</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Save Changes
+        </button>
+    </form>
+
+    <p>
+        <a href="{% url 'core:sunshine_admin' %}">
+            ← Back to Sunshine
+        </a>
+    </p>
+
+</div>
+
+{% endblock %}

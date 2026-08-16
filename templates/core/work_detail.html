@@ -24,7 +24,17 @@
     <img src="{{ entry.cover_image.url }}" alt="{{ entry.title }}" class="article-image" loading="lazy" width="800" height="500">
     {% endif %}
     <div class="article-body">{{ entry.body|linebreaks }}</div>
-    <a href="{% url 'core:work_list' %}" class="link-arrow">← Back to all work</a>
+    <a href="{% url 'core:work_list' %}" class="link-arrow">
+    ← Back to all work
+</a>
+
+{% if user.is_staff %}
+    <div style="margin-top: 16px;">
+        <a href="{% url 'core:work_edit' entry.slug %}" class="button button--primary">
+            Edit
+        </a>
+    </div>
+{% endif %}
 </article>
 
 {% endblock %}
